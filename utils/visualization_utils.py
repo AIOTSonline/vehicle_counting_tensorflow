@@ -193,7 +193,7 @@ def draw_bounding_box_on_image(current_frame_number,image,
   # instead of above.
   display_str_list[0] = predicted_color + " " + display_str_list[0]
   csv_line = predicted_color + "," + str (predicted_direction) + "," + str(predicted_speed) # csv line created
-  display_str_heights = [font.getsize(ds)[1] for ds in display_str_list]
+  display_str_heights = [font.getbbox(ds)[3] - font.getbbox(ds)[1] for ds in display_str_list]  # Updated to use getbbox
 
   # Each display_str has a top and bottom margin of 0.05x.
   total_display_str_height = (1 + 2 * 0.05) * sum(display_str_heights)
@@ -205,7 +205,8 @@ def draw_bounding_box_on_image(current_frame_number,image,
 
   # Reverse list and print from bottom to top.
   for display_str in display_str_list[::-1]:
-    text_width, text_height = font.getsize(display_str)
+    text_width = font.getbbox(display_str)[2] - font.getbbox(display_str)[0]  # Updated to use getbbox
+    text_height = font.getbbox(display_str)[3] - font.getbbox(display_str)[1]  # Updated to use getbbox
     margin = np.ceil(0.05 * text_height)
     draw.rectangle(
         [(left, text_bottom - text_height - 2 * margin), (left + text_width,
@@ -371,7 +372,7 @@ def draw_keypoints_on_image(image,
   keypoints_y = [k[0] for k in keypoints]
   if use_normalized_coordinates:
     keypoints_x = tuple([im_width * x for x in keypoints_x])
-    keypoints_y = tuple([im_height * y for y in keypoints_y])
+    keypoints_y = tuple([im_height * y for x in keypoints_y])
   for keypoint_x, keypoint_y in zip(keypoints_x, keypoints_y):
     draw.ellipse([(keypoint_x - radius, keypoint_y - radius),
                   (keypoint_x + radius, keypoint_y + radius)],
