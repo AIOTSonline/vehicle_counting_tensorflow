@@ -3,6 +3,25 @@ This sample project focuses on "Vechicle Detection, Tracking and Counting" using
 
 ---
 
+
+Virtual Environment Setup
+---------------------------
+
+To ensure a clean and isolated environment, we recommend creating a virtual environment before installing the project dependencies. The steps below assume you are using Python version 3.7 to 3.11:
+
+# Create a virtual environment using Python 3.11 (adjust the version if needed)
+python3.11 -m venv .venv
+
+# Activate the virtual environment
+source .venv/bin/activate
+
+# Install the required packages
+pip install -r requirements.txt
+
+# Run the program with the 'imshow' option to see the processed video
+python3 vehicle_detection_main.py imshow
+
+
 ***The [TensorFlow Object Counting API](https://github.com/ahmetozlu/tensorflow_object_counting_api) is used as a base for object counting on this project, more info can be found on this [repo](https://github.com/ahmetozlu/tensorflow_object_counting_api).***
 
 ---
