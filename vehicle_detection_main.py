@@ -1,10 +1,3 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
-# ----------------------------------------------
-# --- Author         : Ahmet Ozlu
-# --- Mail           : ahmetozlu93@gmail.com
-# --- Date           : 27th January 2018
-# ----------------------------------------------
 
 #############################################################################################
 # command to run the program and show the output: python3 vehicle_detection_main.py imshow  #
@@ -170,11 +163,18 @@ def object_detection_function(command):
                     cv2.FONT_HERSHEY_SIMPLEX,
                     )
 
-                # when the vehicle passed over line and counted, make the color of ROI line green
+                # Calculate dynamic coordinates based on frame dimensions
+                roi_y = int(height * 0.5)  # Example: set the line at the middle of the frame
+                start_point = (0, roi_y)
+                end_point = (width, roi_y)
+
+                # Draw the ROI line with dynamic coordinates
                 if counter == 1:
-                    cv2.line(input_frame, (0, 200), (640, 200), (0, 0xFF, 0), 5)
+                    line_color = (0, 255, 0)  # Green when a vehicle is detected passing
                 else:
-                    cv2.line(input_frame, (0, 200), (640, 200), (0, 0, 0xFF), 5)
+                    line_color = (0, 0, 255)  # Red otherwise
+
+                cv2.line(input_frame, start_point, end_point, line_color, 5)
 
                 # insert information text to video frame
                 cv2.rectangle(input_frame, (10, 275), (230, 337), (180, 132, 109), -1)
