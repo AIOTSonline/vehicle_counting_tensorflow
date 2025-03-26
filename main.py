@@ -142,7 +142,7 @@ diag2_draw_start, diag2_draw_end = get_draw_line(diag2_detection_start, diag2_de
 # ---------------------------------------------------------------
 
 # Open video
-cap = cv2.VideoCapture('traffic4way.mp4')
+cap = cv2.VideoCapture('traffic4way2.mp4')
 cap.set(3, 1920)
 cap.set(4, 1080)
 
